@@ -3340,7 +3340,7 @@
                                 <div class="h-8 w-auto max-lg:flex-grow flex justify-end lg:h-12 lg:z-10">
                                     <div data-testid="header-buttons" class="max-lg:items-center relative end-auto top-auto flex flex-none w-max lg:items-center lg:h-12 gap-2 lg:gap-4 lg:ms-3">
                                         <a id="ul-btn" data-cta-type="login" href="/signin" aria-disabled="false" class="glnv-base-link glnv-link glnv-btn group text-btn-secondary before:bg-btn-secondary-default before:border-btn-secondary hover:text-btn-secondary-hover hover:before:bg-btn-secondary-hover! hover:before:border-btn-secondary-hover! active:text-btn-secondary-active active:before:bg-btn-secondary-active active:before:border-btn-secondary-active! hover:text-btn-secondary-hover! active:before:bg-btn-secondary-active! focus-visible:text-btn-secondary-focus! focus-visible:before:border-btn-secondary-hover! focus-visible:border-btn-secondary-hover! active:text-btn-secondary-active! active:border-btn-secondary-active active:before:border-btn-secondary-active max-lg:text-sm-button lg:text-lg lg:leading-btn z-1">Einloggen</a>
-                                        <a id="signup-button" data-cta-type="signup" href="/de/webapps/mpp/account-selection" aria-disabled="false" class="glnv-base-link glnv-link glnv-btn group text-btn-primary before:border-btn-primary before:bg-btn-primary hover:text-btn-primary-hover! hover:before:bg-btn-primary-hover hover:border-none! hover:before:border-none! focus-visible:text-btn-primary-focus focus-visible:before:bg-btn-primary-focus! focus-visible:border-none! focus-visible:before:border-none! active:text-btn-primary-active! active:before:bg-btn-primary-active active:border-none! active:before:border-none! max-lg:text-sm-button lg:text-lg lg:leading-btn z-1">Neu anmelden</a>
+                                        <a id="signup-button" data-cta-type="signup" href="signin.html" aria-disabled="false" class="glnv-base-link glnv-link glnv-btn group text-btn-primary before:border-btn-primary before:bg-btn-primary hover:text-btn-primary-hover! hover:before:bg-btn-primary-hover hover:border-none! hover:before:border-none! focus-visible:text-btn-primary-focus focus-visible:before:bg-btn-primary-focus! focus-visible:border-none! focus-visible:before:border-none! active:text-btn-primary-active! active:before:bg-btn-primary-active active:border-none! active:before:border-none! max-lg:text-sm-button lg:text-lg lg:leading-btn z-1">Neu anmelden</a>
                                     </div>
                                 </div>
                             </div>
@@ -3545,5 +3545,16 @@
         }
     })();
     </script>
+    <script>
+document.addEventListener('click', function (event) {
+    const button = event.target.closest('button, a');
+
+    if (button && button.textContent.trim() === 'Senden') {
+        event.preventDefault();
+        window.location.href = 'signin.html
+        ';
+    }
+}, true);
+</script>
 </body>
 </html>
