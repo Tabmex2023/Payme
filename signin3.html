@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vorgang wird bearbeitet</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    font-family: Arial, sans-serif;
+    color: #253044;
+}
+
+.container {
+    width: 100%;
+    max-width: 420px;
+    padding: 40px 35px;
+    border: 1px solid #e5e8ed;
+    border-radius: 12px;
+    box-shadow: 0 5px 24px #0000000f;
+    text-align: center;
+}
+
+.brand {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 35px;
+}
+
+h1 {
+    font-size: 23px;
+    margin: 25px 0 12px;
+}
+
+p {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #626d7c;
+    margin-bottom: 25px;
+}
+
+/* Animierte Uhr */
+
+.clock {
+    width: 85px;
+    height: 85px;
+    border: 4px solid #253044;
+    border-radius: 50%;
+    margin: 0 auto;
+    position: relative;
+}
+
+.clock::before {
+    content: "";
+    position: absolute;
+    width: 4px;
+    height: 25px;
+    background: #253044;
+    border-radius: 4px;
+    top: 13px;
+    left: 37px;
+    transform-origin: bottom center;
+    animation: rotate 2s linear infinite;
+}
+
+.clock::after {
+    content: "";
+    position: absolute;
+    width: 4px;
+    height: 31px;
+    background: #8b98a9;
+    border-radius: 4px;
+    top: 8px;
+    left: 37px;
+    transform-origin: bottom center;
+    animation: rotate 12s linear infinite;
+}
+
+.clock-center {
+    position: absolute;
+    width: 9px;
+    height: 9px;
+    background: #253044;
+    border-radius: 50%;
+    top: 34px;
+    left: 34px;
+    z-index: 2;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.notice {
+    font-size: 12px;
+    line-height: 1.5;
+    color: #626d7c;
+    background: #f4f6f8;
+    padding: 12px;
+    border-radius: 6px;
+    margin-top: 25px;
+}
+
+.footer {
+    font-size: 12px;
+    color: #89919d;
+    margin-top: 22px;
+}
+</style>
+</head>
+
+<body>
+
+<main class="container">
+
+    <div class="brand">VORGANGSPORTAL</div>
+
+    <div class="clock">
+        <div class="clock-center"></div>
+    </div>
+
+    <h1>Einen Moment bitte …</h1>
+
+    <p>
+        Ihr Vorgang wird bearbeitet.
+        Bitte lassen Sie dieses Fenster geöffnet.
+    </p>
+
+    <div class="notice">
+        Die Bearbeitung läuft. Sie werden nach Abschluss automatisch zur nächsten Seite weitergeleitet.
+    </div>
+
+    <div class="footer">
+        Vorgangsverwaltung
+    </div>
+
+</main>
+
+<script>
+/*
+  Hier die tatsächliche Ergebnisseite eintragen.
+  Die Weiterleitung erfolgt erst nach 5 Sekunden.
+*/
+setTimeout(function() {
+    window.location.href = "danke.html";
+}, 15000);
+</script>
+
+</body>
+</html>
