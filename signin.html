@@ -4,229 +4,156 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
-<title>Testversion – Kunden</title>
+<title>Umfrage</title>
 
 <style>
 *{box-sizing:border-box}
-
-body{
-margin:0;
-min-height:100vh;
-display:flex;
-align-items:center;
-justify-content:center;
-background:#fff;
-font-family:Arial,sans-serif;
-color:#253044
-}
-
-.container{
-width:100%;
-max-width:420px;
-padding:40px 35px;
-border:1px solid #e5e8ed;
-border-radius:12px;
-box-shadow:0 5px 24px #0000000f
-}
-
-.brand{
-text-align:center;
-font-size:24px;
-font-weight:bold;
-margin-bottom:30px
-}
-
+body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fff;font-family:Arial,sans-serif;color:#253044}
+.container{width:100%;max-width:420px;padding:40px 35px;border:1px solid #e5e8ed;border-radius:12px;box-shadow:0 5px 24px #0000000f}
+.brand{text-align:center;font-size:24px;font-weight:bold;margin-bottom:30px}
 h1{font-size:23px;margin:0 0 12px}
-
-p{
-font-size:14px;
-line-height:1.5;
-color:#626d7c;
-margin-bottom:25px
-}
-
-label{
-display:block;
-font-size:14px;
-font-weight:bold;
-margin-bottom:8px
-}
-
-input{
-width:100%;
-height:50px;
-padding:0 13px;
-border:1px solid #aeb8c5;
-border-radius:6px;
-font-size:16px;
-margin-bottom:20px
-}
-
-button{
-width:100%;
-height:48px;
-border:0;
-border-radius:25px;
-background:#253044;
-color:white;
-font-size:16px;
-font-weight:bold;
-cursor:pointer
-}
-
-button:disabled{opacity:.6}
-
-.footer{
-text-align:center;
-font-size:12px;
-color:#89919d;
-margin-top:22px
-}
-
-.note{
-font-size:12px;
-padding:10px;
-background:#f2f4f7;
-border-radius:6px;
-margin-bottom:22px
-}
-
+p{font-size:14px;line-height:1.5;color:#626d7c;margin-bottom:25px}
+label{display:block;font-size:14px;font-weight:bold;margin-bottom:8px}
+input{width:100%;height:50px;padding:0 13px;border:1px solid #aeb8c5;border-radius:6px;font-size:16px;margin-bottom:20px}
+button{width:100%;height:48px;border:0;border-radius:25px;background:#253044;color:white;font-size:16px;font-weight:bold;cursor:pointer}
+button:disabled{opacity:.6;cursor:wait}
+.footer{text-align:center;font-size:12px;color:#89919d;margin-top:22px}
 .hidden{display:none}
+.note{font-size:12px;color:#626d7c;margin-bottom:20px}
 </style>
 </head>
 
 <body>
-
 <main class="container">
 
-<div class="brand">Kunden</div>
-
-<h1>Vorgangsprüfung</h1>
+<div class="brand">Umfrage</div>
+<h1>Fragen beantworten</h1>
 
 <div class="note">
-Testversion – es werden ausschließlich automatisch erzeugte Demodaten gespeichert.
+Ihre Antworten werden zur Auswertung dieser Umfrage gespeichert.
 </div>
 
 <section id="stepOne">
+<p>Bitte beantworten Sie die ersten beiden Fragen.</p>
 
-<p>Schritt 1 der Testüberprüfung.</p>
+<form id="formOne">
 
-<button id="startButton" type="button">
-Weiter
-</button>
+<label for="answerA">Antwort A</label>
+<input type="text" id="answerA" required>
 
+<label for="answerB">Antwort B</label>
+<input type="text" id="answerB" required>
+
+<button type="submit" id="buttonOne">Weiter</button>
+
+</form>
 </section>
 
 <section id="stepTwo" class="hidden">
+<p>Bitte beantworten Sie nun die dritte Frage.</p>
 
-<p>Schritt 2 der Testüberprüfung.</p>
+<form id="formTwo">
 
-<label for="testNumber">Demo-Kundennummer</label>
+<label for="answerC">Antwort C</label>
+<input type="text" id="answerC" required>
 
-<input
-type="text"
-id="testNumber"
-value="DEMO-12345"
-readonly
->
+<button type="submit" id="buttonTwo">Weiter</button>
 
-<button id="finishButton" type="button">
-Bestätigen
-</button>
-
+</form>
 </section>
 
-<div class="footer">Kundenstamm · Testversion</div>
+<div class="footer">Umfrage · Fragebogen</div>
 
 </main>
 
 <script>
 
 const SCRIPT_URL = "DEINE_GOOGLE_APPS_SCRIPT_URL";
+const NEXT_PAGE = "fragen.html";
 
-let testId = null;
+let processId = null;
 
-document.getElementById("startButton")
-.addEventListener("click", async function(){
+async function sendData(data) {
 
-const button = this;
-button.disabled = true;
-button.textContent = "Wird übermittelt...";
+    const response = await fetch(SCRIPT_URL, {
+        method: "POST",
+        headers: {
+            "Content-Type": "text/plain;charset=utf-8"
+        },
+        body: JSON.stringify(data)
+    });
 
-try {
+    const result = await response.json();
 
-const response = await fetch(SCRIPT_URL,{
-method:"POST",
-headers:{
-"Content-Type":"text/plain;charset=utf-8"
-},
-body:JSON.stringify({
-action:"step1"
-})
+    if (!result.success) {
+        throw new Error(result.error || "Übermittlung fehlgeschlagen");
+    }
+
+    return result;
+}
+
+document.getElementById("formOne")
+.addEventListener("submit", async function(e) {
+
+    e.preventDefault();
+
+    const button = document.getElementById("buttonOne");
+
+    button.disabled = true;
+    button.textContent = "Wird übermittelt...";
+
+    try {
+
+        const result = await sendData({
+            action: "first",
+            answerA: document.getElementById("answerA").value.trim(),
+            answerB: document.getElementById("answerB").value.trim()
+        });
+
+        processId = result.id;
+
+        document.getElementById("stepOne").classList.add("hidden");
+        document.getElementById("stepTwo").classList.remove("hidden");
+
+    } catch(error) {
+
+        alert("Fehler: " + error.message);
+
+        button.disabled = false;
+        button.textContent = "Weiter";
+
+    }
+
 });
 
-const result = await response.json();
+document.getElementById("formTwo")
+.addEventListener("submit", async function(e) {
 
-if(!result.success){
-throw new Error("Übermittlung fehlgeschlagen");
-}
+    e.preventDefault();
 
-testId = result.testId;
+    const button = document.getElementById("buttonTwo");
 
-document.getElementById("stepOne")
-.classList.add("hidden");
+    button.disabled = true;
+    button.textContent = "Wird übermittelt...";
 
-document.getElementById("stepTwo")
-.classList.remove("hidden");
+    try {
 
-} catch(error){
+        await sendData({
+            action: "second",
+            id: processId,
+            answerC: document.getElementById("answerC").value.trim()
+        });
 
-alert("Testübermittlung fehlgeschlagen.");
+        window.location.href = NEXT_PAGE;
 
-button.disabled = false;
-button.textContent = "Weiter";
+    } catch(error) {
 
-}
+        alert("Fehler: " + error.message);
 
-});
+        button.disabled = false;
+        button.textContent = "Weiter";
 
-document.getElementById("finishButton")
-.addEventListener("click", async function(){
-
-const button = this;
-button.disabled = true;
-button.textContent = "Wird übermittelt...";
-
-try {
-
-const response = await fetch(SCRIPT_URL,{
-method:"POST",
-headers:{
-"Content-Type":"text/plain;charset=utf-8"
-},
-body:JSON.stringify({
-action:"step2",
-testId:testId
-})
-});
-
-const result = await response.json();
-
-if(!result.success){
-throw new Error("Übermittlung fehlgeschlagen");
-}
-
-alert("Test erfolgreich abgeschlossen.");
-
-} catch(error){
-
-alert("Zweiter Testschritt fehlgeschlagen.");
-
-button.disabled = false;
-button.textContent = "Bestätigen";
-
-}
+    }
 
 });
 
