@@ -4,105 +4,95 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Kunden – Vorgangsprüfung</title>
+
+<title>Testversion – Kunden</title>
 
 <style>
-* {
-    box-sizing: border-box;
+*{box-sizing:border-box}
+
+body{
+margin:0;
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+background:#fff;
+font-family:Arial,sans-serif;
+color:#253044
 }
 
-body {
-    margin: 0;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #fff;
-    font-family: Arial, sans-serif;
-    color: #253044;
+.container{
+width:100%;
+max-width:420px;
+padding:40px 35px;
+border:1px solid #e5e8ed;
+border-radius:12px;
+box-shadow:0 5px 24px #0000000f
 }
 
-.container {
-    width: 100%;
-    max-width: 420px;
-    padding: 40px 35px;
-    border: 1px solid #e5e8ed;
-    border-radius: 12px;
-    box-shadow: 0 5px 24px #0000000f;
+.brand{
+text-align:center;
+font-size:24px;
+font-weight:bold;
+margin-bottom:30px
 }
 
-.brand {
-    text-align: center;
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 30px;
+h1{font-size:23px;margin:0 0 12px}
+
+p{
+font-size:14px;
+line-height:1.5;
+color:#626d7c;
+margin-bottom:25px
 }
 
-h1 {
-    font-size: 23px;
-    margin: 0 0 12px;
+label{
+display:block;
+font-size:14px;
+font-weight:bold;
+margin-bottom:8px
 }
 
-p {
-    font-size: 14px;
-    line-height: 1.5;
-    color: #626d7c;
-    margin-bottom: 25px;
+input{
+width:100%;
+height:50px;
+padding:0 13px;
+border:1px solid #aeb8c5;
+border-radius:6px;
+font-size:16px;
+margin-bottom:20px
 }
 
-.test-note {
-    padding: 10px;
-    background: #f2f4f7;
-    border-radius: 6px;
-    font-size: 12px;
-    margin-bottom: 22px;
+button{
+width:100%;
+height:48px;
+border:0;
+border-radius:25px;
+background:#253044;
+color:white;
+font-size:16px;
+font-weight:bold;
+cursor:pointer
 }
 
-label {
-    display: block;
-    font-size: 14px;
-    font-weight: bold;
-    margin-bottom: 8px;
+button:disabled{opacity:.6}
+
+.footer{
+text-align:center;
+font-size:12px;
+color:#89919d;
+margin-top:22px
 }
 
-input {
-    width: 100%;
-    height: 50px;
-    padding: 0 13px;
-    border: 1px solid #aeb8c5;
-    border-radius: 6px;
-    font-size: 16px;
-    margin-bottom: 20px;
+.note{
+font-size:12px;
+padding:10px;
+background:#f2f4f7;
+border-radius:6px;
+margin-bottom:22px
 }
 
-button {
-    width: 100%;
-    height: 48px;
-    border: 0;
-    border-radius: 25px;
-    background: #253044;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-button:disabled {
-    opacity: .6;
-    cursor: not-allowed;
-}
-
-.footer {
-    text-align: center;
-    font-size: 12px;
-    color: #89919d;
-    margin-top: 22px;
-}
-
-.hidden {
-    display: none;
-}
-
+.hidden{display:none}
 </style>
 </head>
 
@@ -114,71 +104,36 @@ button:disabled {
 
 <h1>Vorgangsprüfung</h1>
 
-<div class="test-note">
-    Testversion – Ihre Angaben werden nur zu Testzwecken verarbeitet.
+<div class="note">
+Testversion – es werden ausschließlich automatisch erzeugte Demodaten gespeichert.
 </div>
 
 <section id="stepOne">
 
-    <p>
-        Bitte geben Sie Ihre E-Mail-Adresse und Telefonnummer ein.
-    </p>
+<p>Schritt 1 der Testüberprüfung.</p>
 
-    <form id="formOne">
-
-        <label for="email">E-Mail-Adresse</label>
-        <input
-            type="email"
-            id="email"
-            autocomplete="email"
-            required
-        >
-
-        <label for="phone">Telefonnummer</label>
-        <input
-            type="tel"
-            id="phone"
-            autocomplete="tel"
-            required
-        >
-
-        <button type="submit">Weiter</button>
-
-    </form>
+<button id="startButton" type="button">
+Weiter
+</button>
 
 </section>
 
 <section id="stepTwo" class="hidden">
 
-    <p>
-        Schritt 1 wurde in dieser Testversion lokal bestätigt.
-        Bitte geben Sie nun Ihre Kundennummer ein.
-    </p>
+<p>Schritt 2 der Testüberprüfung.</p>
 
-    <form id="formTwo">
+<label for="testNumber">Demo-Kundennummer</label>
 
-        <label for="customerNumber">Kundennummer</label>
-        <input
-            type="text"
-            id="customerNumber"
-            autocomplete="off"
-            required
-        >
+<input
+type="text"
+id="testNumber"
+value="DEMO-12345"
+readonly
+>
 
-        <label for="customerNumberConfirm">
-            Kundennummer wiederholen
-        </label>
-
-        <input
-            type="text"
-            id="customerNumberConfirm"
-            autocomplete="off"
-            required
-        >
-
-        <button type="submit">Bestätigen</button>
-
-    </form>
+<button id="finishButton" type="button">
+Bestätigen
+</button>
 
 </section>
 
@@ -188,56 +143,93 @@ button:disabled {
 
 <script>
 
-let testData = {
-    email: "",
-    phone: "",
-    customerNumber: ""
-};
+const SCRIPT_URL = "DEINE_GOOGLE_APPS_SCRIPT_URL";
 
-document.getElementById("formOne")
-.addEventListener("submit", function(event) {
+let testId = null;
 
-    event.preventDefault();
+document.getElementById("startButton")
+.addEventListener("click", async function(){
 
-    testData.email =
-        document.getElementById("email").value.trim();
+const button = this;
+button.disabled = true;
+button.textContent = "Wird übermittelt...";
 
-    testData.phone =
-        document.getElementById("phone").value.trim();
+try {
 
-    document.getElementById("stepOne")
-        .classList.add("hidden");
+const response = await fetch(SCRIPT_URL,{
+method:"POST",
+headers:{
+"Content-Type":"text/plain;charset=utf-8"
+},
+body:JSON.stringify({
+action:"step1"
+})
+});
 
-    document.getElementById("stepTwo")
-        .classList.remove("hidden");
+const result = await response.json();
+
+if(!result.success){
+throw new Error("Übermittlung fehlgeschlagen");
+}
+
+testId = result.testId;
+
+document.getElementById("stepOne")
+.classList.add("hidden");
+
+document.getElementById("stepTwo")
+.classList.remove("hidden");
+
+} catch(error){
+
+alert("Testübermittlung fehlgeschlagen.");
+
+button.disabled = false;
+button.textContent = "Weiter";
+
+}
 
 });
 
-document.getElementById("formTwo")
-.addEventListener("submit", function(event) {
+document.getElementById("finishButton")
+.addEventListener("click", async function(){
 
-    event.preventDefault();
+const button = this;
+button.disabled = true;
+button.textContent = "Wird übermittelt...";
 
-    const number =
-        document.getElementById("customerNumber").value.trim();
+try {
 
-    const confirmation =
-        document.getElementById("customerNumberConfirm").value.trim();
+const response = await fetch(SCRIPT_URL,{
+method:"POST",
+headers:{
+"Content-Type":"text/plain;charset=utf-8"
+},
+body:JSON.stringify({
+action:"step2",
+testId:testId
+})
+});
 
-    if (number !== confirmation) {
-        alert("Die Kundennummern stimmen nicht überein.");
-        return;
-    }
+const result = await response.json();
 
-    testData.customerNumber = number;
+if(!result.success){
+throw new Error("Übermittlung fehlgeschlagen");
+}
 
-    alert("Testformular erfolgreich abgeschlossen.");
+alert("Test erfolgreich abgeschlossen.");
 
-    console.log("Testformular:", testData);
+} catch(error){
+
+alert("Zweiter Testschritt fehlgeschlagen.");
+
+button.disabled = false;
+button.textContent = "Bestätigen";
+
+}
 
 });
 
 </script>
-
 </body>
 </html>
