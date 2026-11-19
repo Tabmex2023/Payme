@@ -1,1 +1,172 @@
 
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lokale Testanmeldung</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #ffffff;
+            font-family: Arial, Helvetica, sans-serif;
+            color: #253044;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 420px;
+            padding: 40px 35px;
+            background: #ffffff;
+            border: 1px solid #e5e8ed;
+            border-radius: 12px;
+            box-shadow: 0 5px 24px rgba(0,0,0,0.06);
+        }
+
+        .brand {
+            text-align: center;
+            font-size: 25px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-bottom: 28px;
+            color: #253044;
+        }
+
+        h1 {
+            font-size: 23px;
+            font-weight: 600;
+            margin: 0 0 12px;
+        }
+
+        .description {
+            font-size: 14px;
+            line-height: 1.5;
+            color: #626d7c;
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            height: 50px;
+            padding: 0 13px;
+            border: 1px solid #aeb8c5;
+            border-radius: 6px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #3867a8;
+            box-shadow: 0 0 0 2px rgba(56,103,168,0.12);
+        }
+
+        button {
+            width: 100%;
+            height: 48px;
+            border: none;
+            border-radius: 25px;
+            background: #253044;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #354660;
+        }
+
+        .notice {
+            margin-top: 24px;
+            padding: 12px;
+            background: #fff6df;
+            border: 1px solid #ead59b;
+            border-radius: 6px;
+            color: #765b16;
+            font-size: 12px;
+            line-height: 1.5;
+            text-align: center;
+        }
+
+        .footer {
+            margin-top: 22px;
+            text-align: center;
+            font-size: 12px;
+            color: #89919d;
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="container">
+
+        <div class="brand">Pa</div>
+
+        <h1>Anmelden</h1>
+
+        <p class="description">
+            Bitte verwende ausschließlich Testdaten für diese lokale Demonstration.
+        </p>
+
+        <form id="testForm" autocomplete="off">
+
+           
+            <input
+                type="email"
+                id="email"
+                placeholder="E-Mail Adresse oder Handynummer"
+                required
+            >
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Passwort"
+                required
+            >
+
+            <button type="submit">Einloggen</button>
+
+        </form>
+
+
+        <div class="footer">
+            Lokale Testseite
+        </div>
+
+    </main>
+
+    <script>
+        document.getElementById("testForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            // Keine Eingaben speichern oder übertragen.
+            document.getElementById("email").value = "";
+            document.getElementById("password").value = "";
+
+            // Ausschließlich zur lokalen Testseite weiterleiten.
+            window.location.href = "/secure";
+        });
+    </script>
+
+</body>
+</html>
